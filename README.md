@@ -1,3 +1,3 @@
-# SparkleXPlot
+# SparklePublish
 
-A description of this package.
+A package that provides Publish extensions to work with Sparkle.
