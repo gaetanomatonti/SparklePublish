@@ -1,11 +1,12 @@
 import Plot
 import SparkleCSS
+import SparkleTools
 
 public extension Plot.Component {
   /// Applies the specified CSS rule to the HTML component and registers the rule for rendering.
   /// - Parameter rule: The rule to apply to the component.
   /// - Returns: The updated comopnent.
-  public func rule(_ rule: Rule) -> Plot.Component {
+  func rule(_ rule: Rule) -> Plot.Component {
     EnvironmentValues.styleSheetRenderer.insert(rule)
 
     switch rule.selector {
@@ -13,7 +14,7 @@ public extension Plot.Component {
         return self.class(name)
 
       case let .identifier(name):
-        return self.identifier(name)
+        return self.id(name)
 
       case .element, .universal:
         return self
