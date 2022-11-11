@@ -20,4 +20,24 @@ public extension Plot.Component {
         return self
     }
   }
+
+  func style(_ rules: Rule...) -> Plot.Component {
+    rules.forEach { rule in
+      EnvironmentValues.styleSheetRenderer.insert(rule)
+    }
+
+    let classNames = rules
+      .map { rule in
+        switch rule.selector {
+          case let .class(className):
+            return className
+
+          case .identifier, .element, .universal:
+            return ""
+        }
+      }
+      .joined(separator: " ")
+
+    return self.class(classNames)
+  }
 }

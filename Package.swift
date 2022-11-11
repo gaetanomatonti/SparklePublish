@@ -28,5 +28,9 @@ let package = Package(
         "Sparkle"
       ]
     ),
+    .testTarget(
+      name: "SparklePublishTests",
+      dependencies: ["SparklePublish"]
+    ),
   ]
 )
