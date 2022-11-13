@@ -2,11 +2,11 @@ import Plot
 import SparkleCSS
 import SparkleTools
 
-public extension Plot.Component {
+extension Plot.Component {
   /// Applies the specified CSS rule to the HTML component and registers the rule for rendering.
   /// - Parameter rule: The rule to apply to the component.
   /// - Returns: The updated comopnent.
-  func rule(_ rule: Rule) -> Plot.Component {
+  public func rule(_ rule: Rule) -> Plot.Component {
     EnvironmentValues.styleSheetRenderer.insert(rule)
 
     switch rule.selector {
@@ -21,10 +21,8 @@ public extension Plot.Component {
     }
   }
 
-  func style(_ rules: Rule...) -> Plot.Component {
-    rules.forEach { rule in
-      EnvironmentValues.styleSheetRenderer.insert(rule)
-    }
+  public func style(_ rules: Rule...) -> Plot.Component {
+    EnvironmentValues.styleSheetRenderer.insert(rules)
 
     let classNames = rules
       .map { rule in
