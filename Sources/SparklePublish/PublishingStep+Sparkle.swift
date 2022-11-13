@@ -12,7 +12,7 @@ public extension PublishingStep {
       configure(EnvironmentValues.styleSheetRenderer)
     }
   }
-
+  
   /// Generates the CSS from Sparkle.
   /// - Parameter filename: The name of the file to generate.
   static func generateCSS(_ filename: String, path: StaticString = #file) -> Self {
@@ -20,8 +20,12 @@ public extension PublishingStep {
       let filePath = URL(fileURLWithPath: path.description)
       let packagePath = FileManager.default.packagePath(from: filePath)
       let outputPath = packagePath.appendingPathComponent("Output")
-
+      
       let renderer = EnvironmentValues.styleSheetRenderer
+      let container = EnvironmentValues.rulesContainer
+      let rules = await container.rules
+      renderer.insert(Array(rules))
+      
       let generator = Generator(content: renderer.render())
       try generator.write(file: filename, with: "css", to: outputPath)
     }

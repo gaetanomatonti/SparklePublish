@@ -7,7 +7,9 @@ extension Plot.Component {
   /// - Parameter rule: The rule to apply to the component.
   /// - Returns: The updated comopnent.
   public func rule(_ rule: Rule) -> Plot.Component {
-    EnvironmentValues.styleSheetRenderer.insert(rule)
+    Task {
+      await EnvironmentValues.rulesContainer.insert(rule)
+    }
 
     switch rule.selector {
       case let .class(name):
@@ -22,7 +24,9 @@ extension Plot.Component {
   }
 
   public func style(_ rules: Rule...) -> Plot.Component {
-    EnvironmentValues.styleSheetRenderer.insert(rules)
+    Task {
+      await EnvironmentValues.rulesContainer.insert(rules)
+    }
 
     let classNames = rules
       .map { rule in
