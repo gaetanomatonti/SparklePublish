@@ -6,10 +6,10 @@ import SparkleCSS
 final class SparklePublishTests: XCTestCase {
   func testComponentStyle() {
     let component = Paragraph()
-      .style(
-        .fontSize(.rem(1)),
-        .foregroundColor(NamedColor.red)
-      )
+      .style {
+        Rule.fontSize(.rem(1))
+        Rule.foregroundColor(NamedColor.red)
+      }
 
     XCTAssertEqual(component.render(), "<p class=\"text-size-1rem color-red\"></p>")
   }

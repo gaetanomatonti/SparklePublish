@@ -17,7 +17,7 @@ let package = Package(
     ),
     .package(
       url: "https://github.com/gaetanomatonti/Sparkle.git",
-      branch: "develop"
+      from: "0.3.0-alpha"
     )
   ],
   targets: [

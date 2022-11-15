@@ -23,7 +23,12 @@ extension Plot.Component {
     }
   }
 
-  public func style(_ rules: Rule...) -> Plot.Component {
+  /// Applies a set of rules to the HTML component and registers the rules for rendering.
+  /// - Parameter rules: The rules to apply to the component.
+  /// - Returns: The component updated with the class names associated with the rules.
+  public func style(@RuleBuilder rules: () -> [Rule]) -> Plot.Component {
+    let rules = rules()
+    
     Task {
       await EnvironmentValues.rulesContainer.insert(rules)
     }
