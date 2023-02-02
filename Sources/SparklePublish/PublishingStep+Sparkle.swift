@@ -7,9 +7,9 @@ import SparkleTools
 public extension PublishingStep {
   /// Configures the CSS stylesheet renderer.
   /// - Parameter configure: A closure that allows to configure the main `StyleSheetRenderer` instance.
-  static func configureStyleSheet(_ configure: @escaping (StyleSheetRenderer) -> Void) -> Self {
+  static func configureStyleSheet(_ configure: @escaping (RulesContainer) -> Void) -> Self {
     step(named: "Sparkle Stylesheet Configuration ✨") { _ in
-      configure(EnvironmentValues.styleSheetRenderer)
+      configure(EnvironmentValues.rulesContainer)
     }
   }
   
@@ -21,12 +21,9 @@ public extension PublishingStep {
       let packagePath = FileManager.default.packagePath(from: filePath)
       let outputPath = packagePath.appendingPathComponent("Output")
       
-      let renderer = EnvironmentValues.styleSheetRenderer
-      let container = EnvironmentValues.rulesContainer
-      let rules = await container.rules
-      renderer.insert(Array(rules))
-      
-      let generator = Generator(content: renderer.render())
+      let renderer = StyleSheetRenderer()
+      let renderedContent = await renderer.render()
+      let generator = FileGenerator(content: renderedContent)
       try generator.write(file: filename, with: "css", to: outputPath)
     }
   }

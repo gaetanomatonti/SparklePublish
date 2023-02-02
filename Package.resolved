@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gaetanomatonti/Sparkle.git",
       "state" : {
-        "revision" : "19d3e261d385eae361bdfaa317f74b169f36c30c",
-        "version" : "0.3.1-alpha"
+        "revision" : "d5e5bb216f8521788d2f7539ea52a459cf087348",
+        "version" : "0.4.0-alpha"
       }
     },
     {
