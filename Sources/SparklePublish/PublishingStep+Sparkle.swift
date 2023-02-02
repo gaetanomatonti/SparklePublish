@@ -7,9 +7,9 @@ import SparkleTools
 public extension PublishingStep {
   /// Configures the CSS stylesheet renderer.
   /// - Parameter configure: A closure that allows to configure the main `StyleSheetRenderer` instance.
-  static func configureStyleSheet(_ configure: @escaping (RulesContainer) -> Void) -> Self {
+  static func configureStyleSheet(_ configure: @escaping (RulesContainer) async -> Void) -> Self {
     step(named: "Sparkle Stylesheet Configuration ✨") { _ in
-      configure(EnvironmentValues.rulesContainer)
+      await configure(EnvironmentValues.rulesContainer)
     }
   }
   
